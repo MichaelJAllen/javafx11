@@ -20,7 +20,7 @@ scalacOptions ++= Seq(
 )
 
 // Fork a new JVM for 'run' and 'test:run', to avoid JavaFX double initialization problems.
-//fork := true
+fork := true
 
 // Determine OS version of JavaFX binaries
 lazy val osName = System.getProperty("os.name") match {
@@ -46,8 +46,8 @@ val fxRoot = s"${sys.props("user.home")}${fs}.ivy2${fs}cache${fs}org.openjfx${fs
 val fxPaths = javaFXModules.map {m =>
   s"$fxRoot$m${fs}jars${fs}javafx-$m-11-$osName.jar"
 }
-//javaOptions ++= Seq(
-//  "--module-path", fxPaths.mkString(";"),
-//  "--add-modules", "ALL-MODULE-PATH"
-//)
+javaOptions ++= Seq(
+  "--module-path", fxPaths.mkString(";"),
+  "--add-modules", "ALL-MODULE-PATH"
+)
 
