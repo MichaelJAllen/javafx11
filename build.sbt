@@ -19,9 +19,6 @@ scalacOptions ++= Seq(
   "-feature"
 )
 
-// Fork a new JVM for 'run' and 'test:run', to avoid JavaFX double initialization problems.
-fork := true
-
 // Determine OS version of JavaFX binaries
 lazy val osName = System.getProperty("os.name") match {
   case n if n.startsWith("Linux") => "linux"
