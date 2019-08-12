@@ -35,19 +35,3 @@ lazy val javaFXModules = Seq("base", "controls", "fxml", "graphics", "media", "s
 libraryDependencies ++= javaFXModules.map {m=>
   "org.openjfx" % s"javafx-$m" % "11" classifier osName
 }
-
-// When forking, we need to tell the running process how to find the necessary modules (SBT currently doesn't appear to
-// do this for us, which is very odd):
-//
-// This clearly isn't a solution for running a finished product. It might be worth looking at the "sbt-native-packager"
-// plugin to verify whether that addresses the issue of installing and running a product on a user's machine.
-val fs = File.separator
-val fxRoot = s"${sys.props("user.home")}${fs}.ivy2${fs}cache${fs}org.openjfx${fs}javafx-"
-val fxPaths = javaFXModules.map {m =>
-  s"$fxRoot$m${fs}jars${fs}javafx-$m-11-$osName.jar"
-}
-javaOptions ++= Seq(
-  "--module-path", fxPaths.mkString(";"),
-  "--add-modules", "ALL-MODULE-PATH"
-)
-
