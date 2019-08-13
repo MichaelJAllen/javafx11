@@ -42,12 +42,13 @@ libraryDependencies ++= javaFXModules.map {m=>
 // This clearly isn't a solution for running a finished product. It might be worth looking at the "sbt-native-packager"
 // plugin to verify whether that addresses the issue of installing and running a product on a user's machine.
 val fs = File.separator
-val fxRoot = s"${sys.props("user.home")}${fs}.ivy2${fs}cache${fs}org.openjfx${fs}javafx-"
+val ivyHome = Option(sys.props("sbt.ivy.home")).getOrElse(s"${sys.props("user.home")}${fs}.ivy2")
+val fxRoot = s"$ivyHome${fs}cache${fs}org.openjfx${fs}javafx-"
 val fxPaths = javaFXModules.map {m =>
   s"$fxRoot$m${fs}jars${fs}javafx-$m-11-$osName.jar"
 }
 javaOptions ++= Seq(
-  "--module-path", fxPaths.mkString(";"),
+  "--module-path", fxPaths.mkString(File.pathSeparator),
   "--add-modules", "ALL-MODULE-PATH"
 )
 
