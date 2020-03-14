@@ -1,13 +1,13 @@
 import java.io.File
 
 // Name of the project
-name := "JavaFX 11 Hello World"
+name := "JavaFX 14 Hello World"
 
 // Project version
 version := "1.0.0-SNAPSHOT"
 
 // Version of Scala used by the project
-scalaVersion := "2.13.0"
+scalaVersion := "2.13.1"
 
 // Add dependency on JavaFX library
 
@@ -33,7 +33,7 @@ lazy val osName = System.getProperty("os.name") match {
 // Add JavaFX dependencies
 lazy val javaFXModules = Seq("base", "controls", "fxml", "graphics", "media", "swing", "web")
 libraryDependencies ++= javaFXModules.map {m=>
-  "org.openjfx" % s"javafx-$m" % "11" classifier osName
+  "org.openjfx" % s"javafx-$m" % "14" classifier osName
 }
 
 // When forking, we need to tell the running process how to find the necessary modules (SBT currently doesn't appear to
